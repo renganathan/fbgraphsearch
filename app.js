@@ -10,6 +10,7 @@ var fbAdapter = (function() {
          */
         initDomRefs: function() {
             this.searchBox = document.getElementById("searchBox");
+            this.searchButton = document.getElementById("searchBtn");
             this.resultsDiv = document.getElementById("searchResults");
             this.resultsCountSpan = document.getElementById("searchResultCount");
             this.favoritesDiv = document.getElementById("favoritesContainer");
@@ -81,7 +82,7 @@ var fbAdapter = (function() {
             Function to render results on screen, handles dom required for this operation also and adds event handlers as appropriate
          */
         renderResults: function(response, renderFavs) {
-            var dataObj = response["data"] ? response["data"] : response;
+            var dataObj = response["data"] || response;
             //Loop through and display results in the results div
             for (var i = 0; i < dataObj.length; i++) {
                 var currentResponseObject = dataObj[i];
@@ -125,23 +126,11 @@ var fbAdapter = (function() {
                 }
             }
         },
-        /*
-            Handle FB API's search responses
-        */
-        searchResponseHandler: function(response) {
-            if (response && !response.error) {
-                //Remove any previous results which are present here in the results div
-                _private.removeAllFavorites(false);
-
-                //Show the count
-                _private.resultsCountSpan.textContent = response.data.length;
-                _private.renderResults(response, false);
-            }
-        },
         /* 
             Handle key down events on the search box
         */
-        searchKeydownHandler: function(evt) {
+        searchHandler: function(evt) {
+            _private.searchButton.disabled = true;
             // Create a new script element
             var script_element = document.createElement('script');
             var requestObj = {
@@ -149,7 +138,7 @@ var fbAdapter = (function() {
                 callback: 'fbAdapter.searchResponseHandler',
                 method: 'get',
                 pretty: '0',
-                q: this.value,
+                q: _private.searchBox.value,
                 sdk: 'joey',
                 type: 'page'
             };
@@ -167,8 +156,9 @@ var fbAdapter = (function() {
         */
         init: function() {
             _private.initDomRefs();
-            // Add an event listener on the search box
-            _private.searchBox.addEventListener("keyup", _private.searchKeydownHandler);
+            // Add an event listener on the search button
+            _private.searchButton.addEventListener("click", _private.searchHandler);
+            //_private.searchBox.addEventListener("keyup", _private.searchKeydownHandler);
             _private.renderFavorites();
         },
         /*
@@ -183,6 +173,7 @@ var fbAdapter = (function() {
                 //Show the count
                 _private.resultsCountSpan.textContent = response.data.length;
                 _private.renderResults(response, false);
+                _private.searchButton.disabled = false;
             }
         }
     };

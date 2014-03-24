@@ -46,10 +46,12 @@
 }
 #searchBox{
 	width:400px;
-	height:45px;
-    font-size:24pt;
+	height:30px;
+    font-size:16pt;
     border-radius: 5px;
     border: 2px solid gray;
+    float:left;
+    display:block;
 }
 #searchResultCount{
 	font-weight: bold;
@@ -60,4 +62,10 @@
 	height:100px;
 	overflow-y: auto;
 	border: 2px solid gray;
+}
+#searchBtn{
+	height:38px;
+	margin-top:0px;
+	float:left;
+	display: block;
 }
