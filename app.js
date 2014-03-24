@@ -89,6 +89,7 @@ var fbAdapter = (function() {
                 var nameDiv = document.createElement("div");
                 var categoryDiv = document.createElement("div");
                 var favoriteImg = document.createElement("a");
+                var clickableName = document.createElement("a");
                 if (!renderFavs) {
                     //Add the fav icon
                     favoriteImg.className = "favIcon";
@@ -101,14 +102,17 @@ var fbAdapter = (function() {
                     favoriteImg.addEventListener("click", _private.storeFavorite);
                     nameDiv.appendChild(favoriteImg);
                 }
-                nameDiv.textContent = currentResponseObject["name"];
                 nameDiv.className = "nameContainer";
+                //Induce a clickable name
+                clickableName.setAttribute("href", "http://facebook.com/" + currentResponseObject.id);
+                clickableName.setAttribute("target", "_blank");
+                clickableName.textContent = currentResponseObject["name"];
+                nameDiv.appendChild(clickableName);
+                //Induce a category holder
                 categoryDiv.textContent = currentResponseObject["category"];
                 categoryDiv.className = "categoryContainer";
                 nameDiv.appendChild(categoryDiv);
-
-
-                nameDiv.appendChild(favoriteImg);
+                resultRow.className = "resultRow";
                 resultRow.appendChild(nameDiv);
                 if (!renderFavs) {
                     _private.resultsDiv.appendChild(resultRow);

@@ -1,37 +1,6 @@
 .mainContainer{
 	width:850px;
 }
-#searchResults{
-	width:400px;
-	height:300px;
-	margin-top:10px;
-	border: 2px solid lightgray;
-	overflow-y: auto;
-	border-radius: 5px;
-}
-.nameContainer{
-	padding: 5px;
-}
-.nameContainer:hover{
-	color:black;
-	font-weight: bold;
-	border: 2px dashed lightgray;
-	padding:2px;
-	border-radius: 5px;
-}
-.categoryContainer{
-	float:right;
-}
-#searchBox{
-	width:400px;
-	height:45px;
-    font-size:24pt;
-    border-radius: 5px;
-    border: 2px solid gray;
-}
-#searchResultCount{
-	font-weight: bold;
-}
 .favIcon{
 	height:16px;
 	width:16px;
@@ -44,6 +13,48 @@
 
     background:url(images/fav.png) no-repeat 0 0;
 }
+#searchResults{
+	width:400px;
+	height:300px;
+	margin-top:10px;
+	border: 2px solid lightgray;
+	overflow-y: auto;
+	border-radius: 5px;
+}
+.nameContainer{
+	padding: 5px;
+	float:left;
+	width: 95%;
+	text-overflow:ellipsis;
+}
+.nameContainer a{
+	float:left;
+}
+.resultRow{
+	margin:0 auto;
+}
+.nameContainer:hover{
+	color:black;
+	font-weight: bold;
+	border: 2px dashed lightgray;
+	padding:2px;
+	border-radius: 5px;
+}
+.categoryContainer{
+	float:right;
+	text-overflow:ellipsis;
+}
+#searchBox{
+	width:400px;
+	height:45px;
+    font-size:24pt;
+    border-radius: 5px;
+    border: 2px solid gray;
+}
+#searchResultCount{
+	font-weight: bold;
+}
+
 #favoritesContainer{
 	width:400px;
 	height:100px;
